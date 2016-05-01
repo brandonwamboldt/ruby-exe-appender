@@ -59,7 +59,7 @@ class ExeAppender
   # needed.
   def append(data)
     data     += [@file.bytesize].pack('V')
-    pe_offset = read_uint8(@file, PE_OFFSET_OFFSET)
+    pe_offset = read_uint32(@file, PE_OFFSET_OFFSET)
 
     unless read_uint32(@file, pe_offset) == PE_HEADER
       raise StandardError.new("No valid PE header found")
@@ -91,10 +91,7 @@ class ExeAppender
     # Calculate and update checksum of end result
     @file += data
     offset = pe_offset + COFF_OPT_OFFSET + COFF_CHECKSUM_OFFSET
-    puts offset.inspect
-    puts checksum.inspect
-    write_uint_32(@file, 0, offset)
-    #write_uint_32(@file, checksum, offset)
+    write_uint_32(@file, checksum, offset)
   end
 
   # Write the modified EXE to a file

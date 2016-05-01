@@ -12,7 +12,7 @@ Usage
 require('exe_appender')
 
 exe = ExeAppender.new('ConsoleApplication1.exe')
-exe.append('This is some arbitrary data appended to the end of the PDF. Woo123')
+exe.append('This is some arbitrary data appended to the end of the EXE. Woo123')
 exe.write('ConsoleApplication.exe')
 ```
 
